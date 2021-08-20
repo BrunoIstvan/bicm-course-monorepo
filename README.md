@@ -1,1 +1,1 @@
-# bicm-worker
+# bicm-course-monorepo
