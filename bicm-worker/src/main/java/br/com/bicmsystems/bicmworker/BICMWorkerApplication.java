@@ -1,4 +1,4 @@
-package br.com.bicmonteiro.bicmworker;
+package br.com.bicmsystems.bicmworker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

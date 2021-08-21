@@ -1,7 +1,7 @@
-package br.com.bicmonteiro.bicmworker.controllers;
+package br.com.bicmsystems.bicmworker.controllers;
 
-import br.com.bicmonteiro.bicmworker.entities.WorkerModel;
-import br.com.bicmonteiro.bicmworker.repositories.WorkerRepository;
+import br.com.bicmsystems.bicmworker.entities.WorkerModel;
+import br.com.bicmsystems.bicmworker.repositories.WorkerRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.http.ContentType;
@@ -88,6 +88,20 @@ public class WorkerControllerTest {
                 .get("/workers/100")
                 .then()
                 .statusCode(HttpStatus.NOT_FOUND.value());
+
+    }
+
+
+    @Test
+    @DisplayName("GET /workers/-1 - Bad Request")
+    public void shouldReturnBadRequest_WhenFindUsersIsCalledWithNegativeId() {
+
+        given()
+                .accept(ContentType.JSON)
+                .when()
+                .get("/workers/-1")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value());
 
     }
 

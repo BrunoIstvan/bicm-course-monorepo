@@ -1,6 +1,6 @@
-package br.com.bicmonteiro.bicmworker.repositories;
+package br.com.bicmsystems.bicmworker.repositories;
 
-import br.com.bicmonteiro.bicmworker.entities.WorkerModel;
+import br.com.bicmsystems.bicmworker.entities.WorkerModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

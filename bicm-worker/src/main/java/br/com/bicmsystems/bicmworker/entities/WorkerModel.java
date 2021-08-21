@@ -1,4 +1,4 @@
-package br.com.bicmonteiro.bicmworker.entities;
+package br.com.bicmsystems.bicmworker.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
