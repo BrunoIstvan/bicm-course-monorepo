@@ -5,6 +5,7 @@ import br.com.bicmsystems.bicmworker.repositories.WorkerRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.http.ContentType;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,11 +42,11 @@ public class WorkerControllerTest {
 
     @Test
     @DisplayName("GET /workers 200")
-    public void shouldFindAllWorkers_WhenFindAllIsCalled() throws Exception {
+    public void shouldFindAllWorkers_WhenFindAllIsCalled() {
 
-        WorkerModel w1 = new WorkerModel(null, "usuario 1", 100.3);
-        WorkerModel w2 = new WorkerModel(null, "usuario 2", 103.3);
-        WorkerModel w3 = new WorkerModel(null, "usuario 3", 130.3);
+        WorkerModel w1 = new WorkerModel(null, "usuario 1", 100.0);
+        WorkerModel w2 = new WorkerModel(null, "usuario 2", 200.0);
+        WorkerModel w3 = new WorkerModel(null, "usuario 3", 300.0);
         List<WorkerModel> list = List.of(w1, w2, w3);
         when(repository.findAll()).thenReturn(list);
 
@@ -55,15 +56,20 @@ public class WorkerControllerTest {
                 .get("/workers")
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .assertThat(response -> response.getResponse().getContentAsString().contains("usuario 1"));
+                .body("[0].name", Matchers.equalTo("usuario 1"))
+                .body("[0].dailyIncome", Matchers.equalTo(100.0F))
+                .body("[1].name", Matchers.equalTo("usuario 2"))
+                .body("[1].dailyIncome", Matchers.equalTo(200F))
+                .body("[2].name", Matchers.equalTo("usuario 3"))
+                .body("[2].dailyIncome", Matchers.equalTo(300F));
 
     }
 
     @Test
     @DisplayName("GET /workers/100 200")
-    public void shouldFindUser_WhenFindUsersIsCalledForAExistingUser() throws Exception {
+    public void shouldFindUser_WhenFindUsersIsCalledForAExistingUser() {
 
-        WorkerModel w1 = new WorkerModel(100L, "usuario 1", 100.3);
+        WorkerModel w1 = new WorkerModel(100L, "usuario 1", 100.0);
         when(repository.findById(100L)).thenReturn(Optional.of(w1));
 
         given()
@@ -72,7 +78,8 @@ public class WorkerControllerTest {
                 .get("/workers/100")
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .assertThat(response -> response.getResponse().getContentAsString().contains("usuario 1"));
+                .body("name", Matchers.equalTo("usuario 1"))
+                .body("dailyIncome", Matchers.equalTo(100.0F));
 
     }
 
@@ -90,7 +97,6 @@ public class WorkerControllerTest {
                 .statusCode(HttpStatus.NOT_FOUND.value());
 
     }
-
 
     @Test
     @DisplayName("GET /workers/-1 - Bad Request")
