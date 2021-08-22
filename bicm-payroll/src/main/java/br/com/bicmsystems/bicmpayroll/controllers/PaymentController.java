@@ -1,5 +1,6 @@
 package br.com.bicmsystems.bicmpayroll.controllers;
 
+import br.com.bicmsystems.bicmpayroll.exceptions.WorkerNotFoundException;
 import br.com.bicmsystems.bicmpayroll.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ public class PaymentController {
     private PaymentService service;
 
     @GetMapping("/{workerId}/days/{days}")
-    public ResponseEntity<?> getPayment(@PathVariable Long workerId, @PathVariable Integer days) {
+    public ResponseEntity<?> getPayment(@PathVariable Long workerId, @PathVariable Integer days) throws WorkerNotFoundException {
 
         if(workerId < 0 || days < 0)
             return ResponseEntity.badRequest().build();

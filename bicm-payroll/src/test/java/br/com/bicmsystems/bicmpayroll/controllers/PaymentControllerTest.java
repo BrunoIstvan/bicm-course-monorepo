@@ -1,6 +1,7 @@
 package br.com.bicmsystems.bicmpayroll.controllers;
 
 import br.com.bicmsystems.bicmpayroll.entities.PaymentModel;
+import br.com.bicmsystems.bicmpayroll.exceptions.WorkerNotFoundException;
 import br.com.bicmsystems.bicmpayroll.services.PaymentService;
 import io.restassured.http.ContentType;
 import org.hamcrest.Matchers;
@@ -35,7 +36,7 @@ public class PaymentControllerTest {
 
     @Test
     @DisplayName("GET /payments/100/days/10 200")
-    public void shouldReturnPayment_WhenGetPaymentIsCalledWithValidWorkerIdAndDays() {
+    public void shouldReturnPayment_WhenGetPaymentIsCalledWithValidWorkerIdAndDays() throws WorkerNotFoundException {
 
         PaymentModel model = new PaymentModel("usuario 1", 115.0, 10);
         when(service.getPayment(any(), any())).thenReturn(model);
