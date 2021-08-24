@@ -17,14 +17,12 @@ public class PaymentController {
     private PaymentService service;
 
     @GetMapping("/{workerId}/days/{days}")
-    public ResponseEntity<?> getPayment(@PathVariable Long workerId, @PathVariable Integer days) throws WorkerNotFoundException {
-
+    public ResponseEntity<?> getPayment(@PathVariable Long workerId,
+                                        @PathVariable Integer days)
+            throws WorkerNotFoundException {
         if(workerId < 0 || days < 0)
             return ResponseEntity.badRequest().build();
-
         return ResponseEntity.ok(service.getPayment(workerId, days));
-
     }
-
 
 }
