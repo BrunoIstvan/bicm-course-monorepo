@@ -8,10 +8,10 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 @EnableEurekaClient
 @EnableZuulProxy
 @SpringBootApplication
-public class BICMApiGatewayZullApplication {
+public class BICMAPIGatewayZullApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BICMApiGatewayZullApplication.class, args);
+		SpringApplication.run(BICMAPIGatewayZullApplication.class, args);
 	}
 
 }
