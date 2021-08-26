@@ -2,12 +2,14 @@ package br.com.bicmsystems.bicmuser;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
+@EnableEurekaClient
 @SpringBootApplication
-public class BicmUserApplication {
+public class BICMUserApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BicmUserApplication.class, args);
+		SpringApplication.run(BICMUserApplication.class, args);
 	}
 
 }
