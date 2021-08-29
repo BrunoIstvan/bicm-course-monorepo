@@ -26,7 +26,11 @@ public class PaymentController {
             throws WorkerNotFoundException {
         if(workerId < 0 || days < 0)
             return ResponseEntity.badRequest().build();
-        return ResponseEntity.ok(service.getPayment(workerId, days));
+        try {
+            return ResponseEntity.ok(service.getPayment(workerId, days));
+        } catch (WorkerNotFoundException ex) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     public ResponseEntity<?> getPaymentAlternative(Long workerId, Integer days) {
